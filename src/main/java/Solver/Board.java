@@ -36,7 +36,7 @@ public class Board {
     }
 
     /***
-     * Method for checking whether all rows contain unique
+     * Method for checking whether all rows contain unique.
      * @return
      */
     public boolean isValidRow() {
@@ -48,6 +48,25 @@ public class Board {
                         return false;
                     }
                     values += String.valueOf(board[i][j]);
+                }
+            }
+        }
+        return true;
+    }
+
+    /***
+     * Method for checking whether all columns contain unique.
+     * @return
+     */
+    public boolean isValidColumn() {
+        for (int i = 0; i < SIZE; i++) {
+            String values = "";
+            for (int j = 0; j < SIZE; j++) {
+                if (board[j][i] != 0) {
+                    if (values.contains(String.valueOf(board[j][i]))) {
+                        return false;
+                    }
+                    values += String.valueOf(board[j][i]);
                 }
             }
         }

@@ -30,4 +30,27 @@ public class BoardTest {
         Board board = new Board();
         assertTrue(board.isValidRow());
     }
+
+    @Test
+    public void columnIsValid() {
+        for(int k = 0; k < 10000; k++) {
+            Board board = new Board();
+            Random seedGenerator = new Random();
+            int seed1 = seedGenerator.nextInt(9);
+            int seed2 = seedGenerator.nextInt(9);
+            for (int i = 0; i < Board.SIZE; i++) {
+                for (int j = 0; j < Board.SIZE; j++) {
+                    Random rand = new Random();
+                    board.setCell(j,i,rand.nextInt(9) + 1);
+                }
+            }
+            for (int i = 0; i < Board.SIZE; i++) {
+                board.setCell(seed1,i,5);
+                board.setCell((seed1+seed2) % 9,i,5);
+            }
+            assertFalse(board.isValidColumn());
+        }
+        Board board = new Board();
+        assertTrue(board.isValidColumn());
+    }
 }
