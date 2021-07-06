@@ -139,7 +139,14 @@ public class Board {
     /***
      * Getter method for the next empty cell on the Sudoku board.
      */
-    public int[][] get NextEmpty() {
-        return this.board;
+    public void setNextEmpty(int value) {
+        for(int i = 0; i < SIZE; i++) {
+            for(int j = 0; j < SIZE; j++) {
+                if(board[i][j] == 0) {
+                    board[i][j] = value;
+                    return;
+                }
+            }
+        }
     }
 }
