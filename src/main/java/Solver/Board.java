@@ -32,7 +32,7 @@ public class Board {
      * @return
      */
     public boolean isValid() {
-        return false;
+        return isValidColumn() && isValidRow() && isValidSquare();
     }
 
     /***
@@ -74,6 +74,52 @@ public class Board {
     }
 
     /***
+     * Method for checking whether all 3x3 squares on the board have unique values.
+     * @return
+     */
+    public boolean isValidSquare() {
+        for(int i = 0; i < 9; i+=3) {
+            for(int j = 0; j < 9; j+=3) {
+                String values = "";
+                for(int k = 0; k < 3; k++) {
+                    for(int l = 0; l < 3; l++) {
+                        int a = i+k;
+                        int b = j+l;
+                        if (board[i+k][j+l] != 0) {
+                            if (values.contains(String.valueOf(board[i+k][j+l]))) {
+                                return false;
+                            }
+                            values += String.valueOf(board[i+k][j+l]);
+                        }
+                    }
+                }
+            }
+        }
+        System.out.println();
+        return true;
+    }
+
+    /***
+     * Method that checks whether the Sudoku board is complete.
+     * @return
+     */
+    public boolean isComplete() {
+        int countEmpty = 0;
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                if (board[i][j] == 0) {
+                    countEmpty++;
+                }
+            }
+        }
+        if (countEmpty == 0 && isValid()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /***
      * Method for setting the value of a certain cell.
      * @param x
      * @param y
@@ -87,6 +133,13 @@ public class Board {
      * Getter method for the board.
      */
     public int[][] getBoard() {
+        return this.board;
+    }
+
+    /***
+     * Getter method for the next empty cell on the Sudoku board.
+     */
+    public int[][] get NextEmpty() {
         return this.board;
     }
 }

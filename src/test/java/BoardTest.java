@@ -53,4 +53,29 @@ public class BoardTest {
         Board board = new Board();
         assertTrue(board.isValidColumn());
     }
+
+    @Test
+    public void squareIsValid() {
+        for(int k = 0; k < 10000; k++) {
+            Board board = new Board();
+            Random seedGenerator = new Random();
+            int seed1 = seedGenerator.nextInt(9);
+            int seed2 = seedGenerator.nextInt(9);
+            for (int i = 0; i < Board.SIZE; i++) {
+                for (int j = 0; j < Board.SIZE; j++) {
+                    Random rand = new Random();
+                    board.setCell(i,j,rand.nextInt(9) + 1);
+                }
+            }
+            for (int i = 0; i < 9; i+=3) {
+                for (int j = 0; j < 9; j+=3) {
+                    board.setCell(i,j,1);
+                    board.setCell(i,j+1,1);
+                }
+            }
+            assertFalse(board.isValidSquare());
+        }
+        Board board = new Board();
+        assertTrue(board.isValidSquare());
+    }
 }
