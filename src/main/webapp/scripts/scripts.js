@@ -47,6 +47,7 @@ function solvePuzzle() {
 }
 
 function fillTable(answer) {
+    clearColours();
     for(var id = 0; id < 81; id++) {
         if(document.getElementById(id).value == "") {
             document.getElementById(id).classList.add("blue-text");
@@ -59,12 +60,19 @@ function fillTable(answer) {
 }
 
 function clearBoard() {
+    clearColours();
     for(var id = 0; id < 81; id++) {
-        document.getElementById(id).classList.remove("blue-text");
-        document.getElementById(id).classList.remove("black-text");
         document.getElementById(id).value = "";
     }
 }
+
+function clearColours() {
+    for(var id = 0; id < 81; id++) {
+        document.getElementById(id).classList.remove("blue-text");
+        document.getElementById(id).classList.remove("black-text");
+    }
+}
+
 
 function getTableContent() {
     var jsonContent = "{";
