@@ -20,20 +20,19 @@ public class SolverResource {
         Board board = new Board();
         for(int i = 0; i < Board.SIZE; i++) {
             for(int j = 0; j < Board.SIZE; j++) {
-                board.setCell(i,j,json.getInt(String.valueOf(i*10+j)));
+                board.setCell(i,j,json.getInt(String.valueOf(i*9+j)));
             }
         }
         board = Solver.Solver.solveSudoku(board);
         String jsonResponse = "{";
         for(int i = 0; i < Board.SIZE; i++) {
             for(int j = 0; j < Board.SIZE; j++) {
-                int key = i*10+j;
+                int key = i*9+j;
                 jsonResponse += "\""+ key +"\":\""+board.getBoard()[i][j]+"\"";
-                if(i!=Board.SIZE-1 && j!=Board.SIZE-1) {
-                    jsonResponse += ",";
-                }
+                jsonResponse += ",";
             }
         }
+        jsonResponse = jsonResponse.substring(0, jsonResponse.length() - 1);
         jsonResponse +="}";
         return jsonResponse;
     }
